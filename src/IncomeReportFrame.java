@@ -37,7 +37,7 @@ public class IncomeReportFrame extends JFrame {
 		this.setTitle("Έσοδα ανά μήνα");
 
 		this.setSize(500,500);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 
 	}

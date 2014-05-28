@@ -28,7 +28,7 @@ public class ReservationManagerFrame extends JFrame {
 		table = new JTable();
 		table.setVisible(false);
 
-		ButtonListener listener = new ButtonListener();
+		ButtonListener listener = new ButtonListener(this);
 
 		changeButton = new JButton("\u0391\u03BB\u03BB\u03B1\u03B3\u03AE");
 		changeButton.setVisible(false);
@@ -110,7 +110,10 @@ public class ReservationManagerFrame extends JFrame {
 
 	class ButtonListener implements ActionListener{
 
-		@Override
+		private ReservationManagerFrame frame;
+		public ButtonListener(ReservationManagerFrame frame){
+			this.frame=frame;
+		}
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == changeButton){
 				table.getSelectedRow();
@@ -123,9 +126,7 @@ public class ReservationManagerFrame extends JFrame {
 				//rm.deleteReservation(r);
 			}
 			else if(e.getSource() == cancelButton){
-
-
-
+				frame.dispose();
 			}
 
 		}

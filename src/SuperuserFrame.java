@@ -21,7 +21,7 @@ public class SuperuserFrame extends JFrame {
 	public SuperuserFrame(ReservationManager rm) {
 		this.rm = rm;
 		irf = new IncomeReportFrame();
-		ButtonListener buttonListener = new ButtonListener();
+		ButtonListener buttonListener = new ButtonListener(this);
 		
 		EsodaButton = new JButton("\u0391\u03BD\u03B1\u03C6\u03BF\u03C1\u03AC \u0395\u03C3\u03CC\u03B4\u03C9\u03BD");
 		
@@ -34,6 +34,7 @@ public class SuperuserFrame extends JFrame {
 		EsodaButton.addActionListener(buttonListener);
 		PlirotitaButton.addActionListener(buttonListener);
 		EpeksergasiaButton.addActionListener(buttonListener);
+		AposindesiButton.addActionListener(buttonListener);
 		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -71,7 +72,11 @@ public class SuperuserFrame extends JFrame {
 	
 	
 	class ButtonListener implements ActionListener{
-
+		
+		private SuperuserFrame frame;
+		public ButtonListener(SuperuserFrame frame){
+			this.frame=frame;
+		}
 		
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == EsodaButton){
@@ -85,7 +90,7 @@ public class SuperuserFrame extends JFrame {
 				DataManagementFrame edf = new DataManagementFrame(rm);
 			}
 			else if(e.getSource() == AposindesiButton){
-				
+				frame.dispose();
 			}
 
 

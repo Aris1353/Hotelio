@@ -1,3 +1,7 @@
+/ChangeRoomFrame.class
+/CheckInFrame.class
+/CheckOutFrame.class
+/Client.class
 /CodeFileManager.class
 /CompletenessReportFrame.class
 /DataFileManager.class
@@ -24,7 +28,3 @@
 /RoomFileManager.class
 /SuperuserFrame$ButtonListener.class
 /SuperuserFrame.class
-/ChangeRoomFrame.class
-/CheckInFrame.class
-/CheckOutFrame.class
-/Client.class
