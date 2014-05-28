@@ -148,11 +148,13 @@ public class DataManagementFrame extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				int numberOfBeds = Integer.parseInt(klines.getSelectedItem().toString());
-				String type = tipos.getSelectedItem().toString();
-				int numberOfRooms = Integer.parseInt(plithosTextField.getText());
-				double cost = Double.parseDouble(timiTextField.getText());
+				
 				if(e.getSource() == ApothikeusiButton ){
+					int numberOfBeds = Integer.parseInt(klines.getSelectedItem().toString());
+					String type = tipos.getSelectedItem().toString();
+					int numberOfRooms = Integer.parseInt(plithosTextField.getText());
+					double cost = Double.parseDouble(timiTextField.getText());
+					
 					for(int i=0; i<numberOfRooms; i++){
 						rm.getRooms().add(new Room(numberOfBeds,i+100,false,cost,type));
 					}
