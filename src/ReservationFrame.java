@@ -222,9 +222,9 @@ public class ReservationFrame extends JFrame {
 				else{
 					rm.newReservation(c, rm.getRooms(), "Platinum");
 				}
-				for(int i=0; i<rm.getReservations().size(); i++)
+				/*for(int i=0; i<rm.getReservations().size(); i++)
 				System.out.println(rm.getReservations().get(i).getClient().getName().toString());
-				System.out.println(rm.getRooms().size());
+				System.out.println(rm.getRooms().size());*/
 			}
 		}
 	}

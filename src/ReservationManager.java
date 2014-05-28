@@ -83,6 +83,7 @@ public class ReservationManager implements Serializable{
 					done = true;
 					r.calendarSort();
 					resfm.reservationsSaveFile(reservations);
+					roomsfm.roomSaveFile(rooms);
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Δεν υπάρχουν διαθέσιμα δωμάτια για τον επιλεγμένο αριθμό ατόμων για τις επιλεγμένες ημερομηνίες", "Πλήρης",JOptionPane.WARNING_MESSAGE);
