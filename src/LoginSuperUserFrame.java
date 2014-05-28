@@ -7,6 +7,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -18,19 +19,19 @@ public class LoginSuperUserFrame extends JFrame {
 	private ReservationManager rm;
 	private JButton EisodosButton;
 	private JButton AkiroButton;
-	private JPasswordField passwordField_1;
+	private JPasswordField password;
 	
 	public LoginSuperUserFrame(ReservationManager rm) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setType(Type.POPUP);
 		setResizable(false);
 		
-		ButtonListener buttonListener = new ButtonListener();
+		ButtonListener buttonListener = new ButtonListener(this);
 		
 		JLabel EisodosLabel = new JLabel("\u0395\u0399\u03A3\u0391\u0393\u0395\u03A4\u0395 \u039A\u03A9\u0394\u0399\u039A\u039F \u0394\u0399\u0391\u03A7\u0395\u0399\u03A1\u0399\u03A3\u03A4\u0397");
 		EisodosLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
-		passwordField_1 = new JPasswordField();
+		password = new JPasswordField();
 		
 		JLabel PasswordLabel = new JLabel("\u039A\u03C9\u03B4\u03B9\u03BA\u03CC\u03C2 :");
 		PasswordLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -54,7 +55,7 @@ public class LoginSuperUserFrame extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(AkiroButton, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-						.addComponent(passwordField_1, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+						.addComponent(password, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
 						.addComponent(EisodosButton, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
 					.addGap(192))
 		);
@@ -65,7 +66,7 @@ public class LoginSuperUserFrame extends JFrame {
 					.addComponent(EisodosLabel)
 					.addGap(89)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(passwordField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(password, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(PasswordLabel, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
 					.addGap(39)
 					.addComponent(EisodosButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
@@ -84,14 +85,26 @@ public class LoginSuperUserFrame extends JFrame {
 	
 	
 	class ButtonListener implements ActionListener{
-
+		
+		private LoginSuperUserFrame frame;
+		public ButtonListener(LoginSuperUserFrame frame){
+			this.frame=frame;
+		}
 		
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == EisodosButton ){
-				SuperuserFrame suf = new SuperuserFrame(rm);
+				
+				if(password.getText().toString().equals("Diamond123")){
+					SuperuserFrame suf = new SuperuserFrame(rm);
+					frame.dispose();
+				}
+				else{
+					JOptionPane.showMessageDialog(null,"Wrong PassWord","Error",JOptionPane.ERROR_MESSAGE);
+					password.setText(null);
+				}
 			}
 			else if(e.getSource() == AkiroButton){
-				// aaaaa
+				frame.dispose();
 			}
 
 

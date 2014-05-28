@@ -26,7 +26,7 @@ public class DataManagementFrame extends JFrame {
 	private JComboBox klines;
 
 	public DataManagementFrame(ReservationManager rm){
-		ButtonListener listener = new ButtonListener();
+		ButtonListener listener = new ButtonListener(this);
 		this.rm = rm;
 		//this.rooms=rm.getRooms();
 		plithosTextField = new JTextField();
@@ -139,7 +139,12 @@ public class DataManagementFrame extends JFrame {
 	
 	
 	class ButtonListener implements ActionListener{
-	
+		
+		
+			private DataManagementFrame frame;
+			public ButtonListener(DataManagementFrame frame){
+				this.frame=frame;
+			}
 			
 			public void actionPerformed(ActionEvent e) {
 				
@@ -153,7 +158,7 @@ public class DataManagementFrame extends JFrame {
 					}
 				}
 				else if(e.getSource() == AkiroButton){
-					
+					frame.dispose();
 					
 				}
 	
