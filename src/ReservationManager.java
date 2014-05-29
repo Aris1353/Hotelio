@@ -44,6 +44,7 @@ public class ReservationManager implements Serializable{
 
 		r.getRoom().setCheckedIn(true);
 		resfm.reservationsSaveFile(reservations);
+		roomsfm.roomSaveFile(rooms);
 	}
 
 	public double checkOutAReservation(Reservation r, double extraCosts, double discounts){
@@ -64,6 +65,7 @@ public class ReservationManager implements Serializable{
 		r.setTotalCost(reservationCost);
 
 		resfm.reservationsSaveFile(reservations);
+		roomsfm.roomSaveFile(rooms);
 
 		return reservationCost;
 	}
@@ -115,6 +117,7 @@ public class ReservationManager implements Serializable{
 		r.setRoom(room);
 		r.getRoom().setCheckedIn(true);
 		resfm.reservationsSaveFile(reservations);
+		roomsfm.roomSaveFile(rooms);
 
 	}
 
