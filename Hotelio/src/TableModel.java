@@ -63,7 +63,9 @@ public class TableModel extends AbstractTableModel {
 			return r.getRoom().getId();
 		
 		case 9:
-			return r.getClient().isCheckedIn();
+			if(r.getClient().isCheckedIn())
+				return "маи";
+			return "ови";
 		}
 		return r;
 	}
