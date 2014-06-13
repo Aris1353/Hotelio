@@ -239,6 +239,8 @@ public class DataManagementFrame extends JFrame {
 			else if(e.getSource() == nutritionButton){
 				NutritionChangeFrame ncf = new NutritionChangeFrame(rm);
 			}
+			
+			rm.getRoomsfm().roomSaveFile(rm.getRooms());
 
 		}
 	}

@@ -161,17 +161,25 @@ public class ReservationManager implements Serializable{
 			}
 		}*/
 
+		int index = -1;
 		for(int i=0;i<r.getRoom().getCalendar().size();i++){
 			if(r.getClient().getArrival().getMonth() == r.getRoom().getCalendar().get(i).getArrivalDate().getMonth() &&
 					r.getClient().getDeparture().getMonth() == r.getRoom().getCalendar().get(i).getDepartureDate().getMonth()
 					&& r.getClient().getArrival().getDate() == r.getRoom().getCalendar().get(i).getArrivalDate().getDate()
 					&& r.getClient().getDeparture().getDate() == r.getRoom().getCalendar().get(i).getDepartureDate().getDate()){
-				r.getRoom().getCalendar().remove(i);
-				roomsfm.roomSaveFile(rooms);
+				index = i;
 			}
 		}
-
-
+		int index2 = -1;
+		for(int j=0;j<rooms.size();j++){
+			if(rooms.get(j).getId() == r.getRoom().getId()){
+				index2=j;
+				break;
+			}
+		}
+		
+		rooms.get(index2).getCalendar().remove(index);
+		roomsfm.roomSaveFile(rooms);
 		reservations.remove(r);		
 		resfm.reservationsSaveFile(reservations);
 

@@ -162,17 +162,23 @@ public class ReservationManagerFrame extends JFrame {
 				int row = table.getSelectedRow();
 				Reservation selectedReservation = reservations.get(table.convertRowIndexToModel(row));
 				new ModifyReservationFrame(rm , selectedReservation); 
+				reservations = new ArrayList<Reservation>();
+				reservations = rm.searchClient(textField_1.getText());
+				model= new TableModel(reservations);
+				table.setModel(model);
+				
 
 			}
 			else if(e.getSource() == button_2){
 
 				int row = table.getSelectedRow();
-				Reservation selectedReservation = reservations.get(table.convertRowIndexToModel(row));
-				rm.deleteReservation(selectedReservation);
+				Reservation sr = reservations.get(table.convertRowIndexToModel(row));
+				rm.deleteReservation(sr);
 				reservations = new ArrayList<Reservation>();
 				reservations = rm.searchClient(textField_1.getText());
 				model= new TableModel(reservations);
 				table.setModel(model);
+				
 
 			}
 			else if(e.getSource() == button_3){

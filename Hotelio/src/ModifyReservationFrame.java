@@ -47,7 +47,7 @@ public class ModifyReservationFrame extends JFrame {
 		this.temp = r;
 		this.r = r;
 		this.rm = rm;
-		ConfirmButtonListener buttonListener = new ConfirmButtonListener();
+		ConfirmButtonListener buttonListener = new ConfirmButtonListener(this);
 		SpinnerModel m = new SpinnerNumberModel(r.getClient().getAdults(),0,3,1);
 		SpinnerModel model = new SpinnerNumberModel(r.getClient().getUnderages(), //initial value 
 				0, //min
@@ -208,7 +208,11 @@ public class ModifyReservationFrame extends JFrame {
 	}
 
 	class ConfirmButtonListener implements ActionListener{
-
+		
+		private ModifyReservationFrame mrf;
+		public ConfirmButtonListener(ModifyReservationFrame mrf){
+			this.mrf=mrf;
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
@@ -255,7 +259,10 @@ public class ModifyReservationFrame extends JFrame {
 			
 			if(done == false){
 				rm.newReservation(temp.getClient(), rm.getRooms(), temp.getRoom().getType());
+				JOptionPane.showMessageDialog(null, "Η κράτηση έμεινε η ίδια","",JOptionPane.ERROR_MESSAGE);
 			}
+			
+			mrf.dispose();
 			
 		}
 	}
