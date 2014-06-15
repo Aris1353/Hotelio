@@ -22,9 +22,9 @@ public class CheckOutFrame extends JFrame {
 	private ReservationManager rm;
 	private JTable table;
 	private ArrayList<Reservation> temp;
-	
+
 	public CheckOutFrame(ReservationManager rm) {
-		
+
 
 		this.setPreferredSize(new Dimension(800,500));
 		this.rm = rm;
@@ -33,6 +33,8 @@ public class CheckOutFrame extends JFrame {
 
 		temp = new ArrayList<Reservation>();
 
+		/*Το παρακάτω τμήμα κώδικα σαρώνει όλες τις υπάρχοντες κρατήσεις και αποθηκεύει
+		 * στον πίνακα temp εκείνες στις οποίες ο πελάτης έχει κάνει check-in*/
 		for(Reservation r : rm.getReservations()){
 			if(r.getClient().isCheckedIn()){
 				temp.add(r);
@@ -41,45 +43,47 @@ public class CheckOutFrame extends JFrame {
 
 		if (temp.size() == 0)
 			JOptionPane.showMessageDialog(null, "Δεν υπάρχουν checked-in δωμάτια", "Check-Out", JOptionPane.INFORMATION_MESSAGE);
-		
+
 		else{
-		table = new JTable();
-		TableModel model = new TableModel(temp);
+			table = new JTable();
+			TableModel model = new TableModel(temp);
 
-		JScrollPane scrollPane = new JScrollPane(table);
-		table.setModel(model);
+			JScrollPane scrollPane = new JScrollPane(table);
+			table.setModel(model);
 
-		JButton btnCheckout = new JButton("Check-Out");
-		btnCheckout.addActionListener(buttonListener);
-		
+			JButton btnCheckout = new JButton("Check-Out");
+			btnCheckout.addActionListener(buttonListener);
 
-		GroupLayout groupLayout = new GroupLayout(this.getContentPane());
-		groupLayout.setHorizontalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
-				.addGroup(groupLayout.createSequentialGroup()
-						.addGap(238)
-						.addComponent(btnCheckout, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-						.addGap(244))
-				);
-		groupLayout.setVerticalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 281, GroupLayout.PREFERRED_SIZE)
-						.addGap(65)
-						.addComponent(btnCheckout, GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-						.addGap(71))
-				);
-		this.getContentPane().setLayout(groupLayout);
 
-		this.pack();
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setVisible(true);
+			GroupLayout groupLayout = new GroupLayout(this.getContentPane());
+			groupLayout.setHorizontalGroup(
+					groupLayout.createParallelGroup(Alignment.LEADING)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+					.addGroup(groupLayout.createSequentialGroup()
+							.addGap(238)
+							.addComponent(btnCheckout, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+							.addGap(244))
+					);
+			groupLayout.setVerticalGroup(
+					groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 281, GroupLayout.PREFERRED_SIZE)
+							.addGap(65)
+							.addComponent(btnCheckout, GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+							.addGap(71))
+					);
+			this.getContentPane().setLayout(groupLayout);
+
+			this.pack();
+			this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			this.setVisible(true);
 		}
 	}
 
 	class ButtonListener implements ActionListener{
 
+		/*Το παρακάτω τμήμα κώδικα χρησιμεύει έτσι ώστε παίρνοντας ως παράμετρο το frame να έχουμε την δυνατότητα
+		 * με το πάτημα του κουμπιού "ΟΚ" να κλείνει το συγκεκριμένο παράθυρο  */
 		private CheckOutFrame chkFrame;
 
 		public ButtonListener(CheckOutFrame frame){
@@ -88,9 +92,9 @@ public class CheckOutFrame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			int row = table.getSelectedRow();
-			Reservation selectedReservation = temp.get(table.convertRowIndexToModel(row));
-			CostFrame costFrame = new CostFrame(rm, selectedReservation);
+			int row = table.getSelectedRow(); //Επιλογή κράτησης
+			Reservation selectedReservation = temp.get(table.convertRowIndexToModel(row)); //Μετατροπή γραμμής σε κράτηση
+			CostFrame costFrame = new CostFrame(rm, selectedReservation); 
 
 			chkFrame.repaint();
 		}

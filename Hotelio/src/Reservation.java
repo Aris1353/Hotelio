@@ -1,34 +1,37 @@
 import java.io.Serializable;
 
+
+//Δημιουργία κλάσης που μας δίνει την δυνατότητα σύνδεσης ένος δωματίου του ξενοδοχείου με ένα πελάτη
 public class Reservation implements Serializable{
-	
-	
+
+
 	private Client client;
 	private Room room;
 	private double totalCost;
-	
+
 	public Reservation(Client client, Room room) {
 		this.client = client;
 		this.room = room;
-		room.getCalendar().add(new Period(client.getArrival(), client.getDeparture()));
-		
+		room.getCalendar().add(new Period(client.getArrival(), client.getDeparture())); /*Προσθήκη στο ημερολόγιο του δωματίου
+                																		 *την άφιξη και την αναχώρηση 
+                																		 *του πελάτη*/
 	}
 
 	public Client getClient() {
 		return client;
 	}
 
-	
+
 	public void setClient(Client client) {
 		this.client = client;
 	}
 
-	
+
 	public Room getRoom() {
 		return room;
 	}
 
-	
+
 	public void setRoom(Room room) {
 		this.room = room;
 	}
@@ -40,11 +43,11 @@ public class Reservation implements Serializable{
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 
 }

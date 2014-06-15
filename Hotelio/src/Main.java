@@ -6,7 +6,6 @@ public class Main {
 
 
 	public static void main(String[] args)  {
-		// TODO Auto-generated method stub
 
 		RoomFileManager roomfm = new RoomFileManager();
 		ReservationFileManager resfm = new ReservationFileManager();
@@ -14,7 +13,7 @@ public class Main {
 		DataFileManager dfm = new DataFileManager();
 
 		ReservationManager rm = new ReservationManager(resfm, roomfm,cfm,dfm);
-		
+
 		MainFrame mf = new MainFrame(rm);
 	}
 

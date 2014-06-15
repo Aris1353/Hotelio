@@ -26,8 +26,8 @@ import javax.swing.JLabel;
 public class FreeRoomsFrame extends JFrame {
 
 	private ReservationManager rm;
-	private JSpinner spinner;
-	private JSpinner spinner_1;
+	private JSpinner arrivalSpinner;
+	private JSpinner deparureSpinner;
 	private JTable table;
 	private JButton btnSearch;
 	private JButton button;
@@ -44,27 +44,27 @@ public class FreeRoomsFrame extends JFrame {
 		now.setSeconds(00);
 		SpinnerDateModel model1 = new SpinnerDateModel(now, null, null, Calendar.DAY_OF_WEEK);   
 
-		spinner = new JSpinner(model1);
-		spinner.setModel(new SpinnerDateModel(now, null, null, Calendar.DAY_OF_WEEK));
+		arrivalSpinner = new JSpinner(model1);
+		arrivalSpinner.setModel(new SpinnerDateModel(now, null, null, Calendar.DAY_OF_WEEK));
 
-		spinner_1 = new JSpinner(model1);
-		spinner_1.setModel(new SpinnerDateModel(now , null, null, Calendar.DAY_OF_YEAR));
+		deparureSpinner = new JSpinner(model1);
+		deparureSpinner.setModel(new SpinnerDateModel(now , null, null, Calendar.DAY_OF_YEAR));
 
 		DateFormat df = new SimpleDateFormat("dd MMM yyyy");
-		JSpinner.DateEditor editor = new JSpinner.DateEditor(spinner, "dd MMM yyyy HH:mm:ss");
-		JSpinner.DateEditor editor1 = new JSpinner.DateEditor(spinner_1, "dd MMM yyyy HH:mm:ss");
+		JSpinner.DateEditor editor = new JSpinner.DateEditor(arrivalSpinner, "dd MMM yyyy HH:mm:ss");
+		JSpinner.DateEditor editor1 = new JSpinner.DateEditor(deparureSpinner, "dd MMM yyyy HH:mm:ss");
 
 		JFormattedTextField ftf = editor.getTextField();  
 		JFormattedTextField ftf1 = editor1.getTextField();
 		ftf.setEditable(false);  
 		ftf1.setEditable(false);
-		spinner.setEditor(editor);  
-		spinner_1.setEditor(editor1);
+		arrivalSpinner.setEditor(editor);  
+		deparureSpinner.setEditor(editor1);
 
 
 		table = new JTable();
 		JScrollPane scrollPane = new JScrollPane(table);
-		
+
 
 		btnSearch = new JButton("Αναζήτηση");
 		btnSearch.addActionListener(buttonListener);
@@ -89,8 +89,8 @@ public class FreeRoomsFrame extends JFrame {
 												.addComponent(label, GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
 												.addPreferredGap(ComponentPlacement.RELATED)
 												.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-														.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-														.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+														.addComponent(deparureSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+														.addComponent(arrivalSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 														.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE))
 														.addGroup(groupLayout.createSequentialGroup()
 																.addContainerGap()
@@ -107,11 +107,11 @@ public class FreeRoomsFrame extends JFrame {
 						.addGap(44)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(label, GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
-								.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(arrivalSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 								.addGap(41)
 								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 										.addComponent(label_1, GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
-										.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(deparureSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 										.addGap(44)
 										.addComponent(btnSearch, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
 										.addGap(81)
@@ -131,6 +131,8 @@ public class FreeRoomsFrame extends JFrame {
 
 	class ButtonListener implements ActionListener{
 
+		/*Το παρακάτω τμήμα κώδικα χρησιμεύει έτσι ώστε παίρνοντας ως παράμετρο το frame να έχουμε την δυνατότητα
+		 * με το πάτημα του κουμπιού "ΟΚ" να κλείνει το συγκεκριμένο παράθυρο  */
 		FreeRoomsFrame frFrame;
 		public ButtonListener(FreeRoomsFrame frFrame){
 			this.frFrame = frFrame;
@@ -139,12 +141,14 @@ public class FreeRoomsFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			if(e.getSource() == btnSearch){
-				Date arr = (Date)spinner.getValue();
-				Date dep = (Date)spinner_1.getValue();
-				ArrayList<Room> freeRooms = rm.searchFreeRoom(arr, dep, rm.getRooms());
+				/*Το παρακάτω τμήμα κώδικα μας δείχνει ας υπάρχουν διαθέσιμα δωμάτια για τις ημερομηνίες 
+				 *"άφιξη" και "αναχώρηση" που έχει ορίσει ο χρήστης*/
+				Date arrival = (Date)arrivalSpinner.getValue();
+				Date departure = (Date)deparureSpinner.getValue();
+				ArrayList<Room> freeRooms = rm.searchFreeRoom(arrival, departure, rm.getRooms());
 				model = new RoomsTableModel(freeRooms);
 				table.setModel(model);
-				
+
 			}
 			else if(e.getSource() == button){
 				frFrame.dispose();

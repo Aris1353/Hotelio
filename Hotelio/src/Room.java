@@ -4,13 +4,14 @@ import java.util.Collections;
 import java.util.Date;
 
 
-
+//Η κλάση αυτή έχει κατασκευαστεί ώστε να προσομοιώνει ένα ΔΩΜΑΤΙΟ
 public class Room implements Serializable{
 
-	
+
 	private int numberOfBeds;
 	private int id;
-	private ArrayList<Period> calendar ;
+	private ArrayList<Period> calendar ; /*Κάθε δωμάτιο έχει το δικό του ημερολόγιο, στο οποίο είναι καταχωρημένες
+	 									  *οι ημερομηνίες στις οποίες υπάρχει κράτηση*/
 	private double cost;
 	private String type;
 
@@ -22,9 +23,10 @@ public class Room implements Serializable{
 		this.cost = cost;
 		this.type = type;
 		calendar = new ArrayList<Period>();
-		
+
 	}
 
+	//Έλεγχος αν το δωμάτιο είναι διαθέσιμο στην συγκεκριμένη περίοδο
 	public boolean isAvailable(Date arrival, Date departure){
 		if (calendar.size() == 0){
 			return true;
@@ -34,11 +36,13 @@ public class Room implements Serializable{
 				return true;
 			}
 		}
-		else{
+		else{ 
 			if(departure.before(calendar.get(0).getArrivalDate()) || arrival.after(calendar.get(calendar.size()-1).getDepartureDate())) {
-				return true;
+				/*Έλεγχος αν η ημερομηνία αναχώρησης είναι πριν από την ημερομηνία άφιξης που βρίσκεται
+				 *στην πρώτη θέση στο ημερολόγιο ή η ημερομηνία αφιξης είναι μετά την αναχώρηση της τελευταίας θέσης του ημερολογίου*/
+				return true; 
 			}
-			else{
+			else{ //Έλεγχος για ενδιάμεσες περιόδους
 				for(int i=0; i<calendar.size(); i++){
 					if(arrival.after(calendar.get(i).getDepartureDate()) && departure.before(calendar.get(i+1).getArrivalDate())){
 						return true;
@@ -56,57 +60,57 @@ public class Room implements Serializable{
 	public void calendarSort(){
 		Collections.sort(calendar,new PeriodCompare());
 	}
-	
+
 	public int searchDate(Date arrival){
 		int i = 0;
-		
+
 		while(true){
 			if(arrival.equals(calendar.get(i).getArrivalDate())){
 				return i;
 			}
 			i++;
-			
+
 		}
 	}
 
-	
+
 	public int getNumberOfBeds() {
 		return numberOfBeds;
 	}
 
-	
+
 	public void setNumberOfBeds(int numberOfBeds) {
 		this.numberOfBeds = numberOfBeds;
 	}
 
-	
+
 	public int getId() {
 		return id;
 	}
 
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	
 
-	
+
+
 	public ArrayList<Period> getCalendar() {
 		return calendar;
 	}
 
-	
+
 	public void setCalendar(ArrayList<Period> calendar) {
 		this.calendar = calendar;
 	}
 
-	
+
 	public double getCost() {
 		return cost;
 	}
 
-	
+
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
@@ -119,20 +123,4 @@ public class Room implements Serializable{
 		this.type = type;
 	}
 	
-	
-
-	
-
-	
-	
-	
-	
-	
-
-
-
-
-
-
-
 }

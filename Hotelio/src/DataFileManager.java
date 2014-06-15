@@ -6,9 +6,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
+/*Δημιουργία αρχείου για την αποθήκευση των τιμών για τα είδη διατροφής*/
 public class DataFileManager implements Serializable{
-	
+
 	public void nutritionCostSaveFile(NutritionCost nc){
 
 		try {
@@ -32,12 +32,12 @@ public class DataFileManager implements Serializable{
 			nc = (NutritionCost) in.readObject();
 			in.close();
 			fileIn.close();	
-		
-    } catch (IOException e) {
-    	e.printStackTrace();
-    }catch (ClassNotFoundException e) {
-        e.printStackTrace();
-    }
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		return nc;
 	}
 

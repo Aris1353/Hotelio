@@ -7,9 +7,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
+//Δημιουργία αρχείου για την αποθήκευση των κρατήσεων του ξενοδοχείου
 public class ReservationFileManager implements Serializable{
-	
+
 	public void reservationsSaveFile(ArrayList<Reservation> reservations){
 
 		try {
@@ -33,18 +33,18 @@ public class ReservationFileManager implements Serializable{
 			reservations = (ArrayList) in.readObject();
 			in.close();
 			fileIn.close();	
-		
-    } catch (IOException e) {
-    	e.printStackTrace();
-    	reservations = new ArrayList<Reservation>();
-    }catch (ClassNotFoundException e) {
-    	e.printStackTrace();
-    	reservations = new ArrayList<Reservation>();
-    }
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			reservations = new ArrayList<Reservation>();
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			reservations = new ArrayList<Reservation>();
+		}
 		return reservations;
 	}
-	
-	
+
+
 
 
 }

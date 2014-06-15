@@ -19,26 +19,27 @@ public class CompletenessReportFrame extends JFrame {
 	public CompletenessReportFrame(ReservationManager rm) {
 		this.rm = rm;
 
-		double eachMonth[]={0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+		double eachMonth[]={0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0}; //Δημιουργία πίνακα στον οποίο καταχωρούνται τα ποσοστά πληρότητας του κάθε μήνα
+
 
 		for(int i=0; i<12; i++){
-			double monthDays = 0.0;
-			for(int j=0; j<31; j++){
-				int sum = 0;
+			double monthDays = 0.0; //Αρχικοποίηση του ποσοστού πληρότητας
+			for(int j=0; j<31; j++){ 
+				int sum = 0;  //Στην μεταβλητή sum καταχωρείτε ο συνολικός αριθμός των κρατήσεων για την ημέρα j
 				Date d = new Date();
 				d.setMonth(i);
 				d.setDate(j);
 				d.setHours(00);
 				d.setMinutes(00);
 				d.setSeconds(00);
-				for(Reservation r : rm.getReservations()){
+				for(Reservation r : rm.getReservations()){ 
 					if(d.after(r.getClient().getArrival()) && d.before(r.getClient().getDeparture())){
 						sum++;
 					}
 				}
-				monthDays += sum / (double)rm.getRooms().size();
+				monthDays += sum / (double)rm.getRooms().size(); //ποσοστό πληρότητας για κάθε μέρα
 			}
-			eachMonth[i] = monthDays / 30;
+			eachMonth[i] = monthDays / 30; //ποσοστό πλρότητας για κάθε μήνα
 			dataset.addValue(eachMonth[i]*100, ""+eachMonth[i], ""+(i+1));
 		}
 	}

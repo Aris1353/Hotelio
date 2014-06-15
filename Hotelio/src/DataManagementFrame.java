@@ -21,52 +21,52 @@ import javax.swing.JLayeredPane;
 
 public class DataManagementFrame extends JFrame {
 	private ReservationManager rm;
-	private JTextField plithosTextField;
-	private JTextField timiTextField;
+	private JTextField NumberOfRoomsTextField;
+	private JTextField CostTextField;
 	private ArrayList<Room> rooms = new ArrayList<Room>();
-	private JButton ApothikeusiButton, AkiroButton;
-	private JComboBox tipos;
-	private JComboBox klines;
-	private JButton btnReset;
+	private JButton saveButton, CancelButton;
+	private JComboBox Type;
+	private JComboBox NumberOfBeds;
+	private JButton resetButton;
 	private JButton codeButton;
 	private JButton nutritionButton;
 
 	public DataManagementFrame(ReservationManager rm){
 		ButtonListener listener = new ButtonListener(this);
 		this.rm = rm;
-		plithosTextField = new JTextField();
-		plithosTextField.setColumns(10);
+		NumberOfRoomsTextField = new JTextField();
+		NumberOfRoomsTextField.setColumns(10);
 
-		timiTextField = new JTextField();
-		timiTextField.setColumns(10);
-
-
-		ApothikeusiButton = new JButton("\u0391\u03C0\u03BF\u03B8\u03AE\u03BA\u03B5\u03C5\u03C3\u03B7");
-
-		tipos = new JComboBox();
-		tipos.setModel(new DefaultComboBoxModel(new String[] {"Regular", "Deluxe", "Platinum"}));
+		CostTextField = new JTextField();
+		CostTextField.setColumns(10);
 
 
-		klines = new JComboBox();
+		saveButton = new JButton("\u0391\u03C0\u03BF\u03B8\u03AE\u03BA\u03B5\u03C5\u03C3\u03B7");
 
-		klines.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
-		AkiroButton = new JButton("\u0386\u03BA\u03C5\u03C1\u03BF");
-		AkiroButton.addActionListener(listener);
-		ApothikeusiButton.addActionListener(listener);
+		Type = new JComboBox();
+		Type.setModel(new DefaultComboBoxModel(new String[] {"Regular", "Deluxe", "Platinum"}));
 
-		JLabel lblNewLabel = new JLabel("\u0391\u03C1\u03B9\u03B8\u03BC\u03CC\u03C2 \u039A\u03BB\u03B9\u03BD\u03CE\u03BD");
 
-		JLabel lblNewLabel_1 = new JLabel("\u03A4\u03CD\u03C0\u03BF\u03C2");
+		NumberOfBeds = new JComboBox();
 
-		JLabel lblNewLabel_2 = new JLabel("\u03A0\u03BB\u03AE\u03B8\u03BF\u03C2 \u0394\u03C9\u03BC\u03B1\u03C4\u03AF\u03C9\u03BD \u03B1\u03BD\u03B1 \u03A4\u03CD\u03C0\u03BF");
+		NumberOfBeds.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
+		CancelButton = new JButton("\u0386\u03BA\u03C5\u03C1\u03BF");
+		CancelButton.addActionListener(listener);
+		saveButton.addActionListener(listener);
 
-		JLabel lblNewLabel_3 = new JLabel("\u03A4\u03B9\u03BC\u03AE");
+		JLabel NumberOfBedsLabel = new JLabel("\u0391\u03C1\u03B9\u03B8\u03BC\u03CC\u03C2 \u039A\u03BB\u03B9\u03BD\u03CE\u03BD");
 
-		JLabel lblNewLabel_4 = new JLabel("\u0395\u03C0\u03B5\u03BE\u03B5\u03C1\u03B3\u03B1\u03C3\u03AF\u03B1 \u0394\u03B5\u03B4\u03BF\u03BC\u03AD\u03BD\u03C9\u03BD");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 21));
+		JLabel TypeLabel = new JLabel("\u03A4\u03CD\u03C0\u03BF\u03C2");
 
-		btnReset = new JButton("RESET");
-		btnReset.addActionListener(listener);
+		JLabel NumberOfRoomsLabel = new JLabel("\u03A0\u03BB\u03AE\u03B8\u03BF\u03C2 \u0394\u03C9\u03BC\u03B1\u03C4\u03AF\u03C9\u03BD \u03B1\u03BD\u03B1 \u03A4\u03CD\u03C0\u03BF");
+
+		JLabel CostLabel = new JLabel("\u03A4\u03B9\u03BC\u03AE");
+
+		JLabel DataManagerLabel = new JLabel("\u0395\u03C0\u03B5\u03BE\u03B5\u03C1\u03B3\u03B1\u03C3\u03AF\u03B1 \u0394\u03B5\u03B4\u03BF\u03BC\u03AD\u03BD\u03C9\u03BD");
+		DataManagerLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
+
+		resetButton = new JButton("RESET");
+		resetButton.addActionListener(listener);
 
 		codeButton = new JButton("\u0391\u03BB\u03BB\u03B1\u03B3\u03AE \u03BA\u03C9\u03B4\u03B9\u03BA\u03BF\u03CD");
 
@@ -81,38 +81,38 @@ public class DataManagementFrame extends JFrame {
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 										.addGap(196)
-										.addComponent(AkiroButton))
+										.addComponent(CancelButton))
 										.addGroup(groupLayout.createSequentialGroup()
 												.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 														.addGroup(groupLayout.createSequentialGroup()
 																.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 																		.addGroup(groupLayout.createSequentialGroup()
 																				.addGap(52)
-																				.addComponent(klines, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+																				.addComponent(NumberOfBeds, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 																				.addGroup(groupLayout.createSequentialGroup()
 																						.addGap(30)
-																						.addComponent(lblNewLabel)))
+																						.addComponent(NumberOfBedsLabel)))
 																						.addGap(42)
 																						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-																								.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																								.addComponent(tipos, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+																								.addComponent(TypeLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																								.addComponent(Type, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 																								.addPreferredGap(ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
 																								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-																										.addComponent(plithosTextField, 135, 135, 135)
-																										.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+																										.addComponent(NumberOfRoomsTextField, 135, 135, 135)
+																										.addComponent(NumberOfRoomsLabel, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
 																										.addGap(39)
 																										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-																												.addComponent(timiTextField, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-																												.addComponent(lblNewLabel_3)))
+																												.addComponent(CostTextField, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+																												.addComponent(CostLabel)))
 																												.addGroup(groupLayout.createSequentialGroup()
 																														.addGap(80)
-																														.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 295, GroupLayout.PREFERRED_SIZE)
+																														.addComponent(DataManagerLabel, GroupLayout.PREFERRED_SIZE, 295, GroupLayout.PREFERRED_SIZE)
 																														.addGap(27)
-																														.addComponent(btnReset, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
+																														.addComponent(resetButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
 																														.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 																																.addGroup(groupLayout.createSequentialGroup()
 																																		.addGap(18)
-																																		.addComponent(ApothikeusiButton))
+																																		.addComponent(saveButton))
 																																		.addGroup(groupLayout.createSequentialGroup()
 																																				.addPreferredGap(ComponentPlacement.RELATED)
 																																				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -127,14 +127,14 @@ public class DataManagementFrame extends JFrame {
 								.addGroup(groupLayout.createSequentialGroup()
 										.addGap(32)
 										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-												.addComponent(lblNewLabel_4)
-												.addComponent(btnReset, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
+												.addComponent(DataManagerLabel)
+												.addComponent(resetButton, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
 												.addGap(49)
 												.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-														.addComponent(lblNewLabel)
-														.addComponent(lblNewLabel_1)
-														.addComponent(lblNewLabel_2)
-														.addComponent(lblNewLabel_3)))
+														.addComponent(NumberOfBedsLabel)
+														.addComponent(TypeLabel)
+														.addComponent(NumberOfRoomsLabel)
+														.addComponent(CostLabel)))
 														.addGroup(groupLayout.createSequentialGroup()
 																.addGap(31)
 																.addComponent(codeButton)
@@ -144,21 +144,21 @@ public class DataManagementFrame extends JFrame {
 																		.addGroup(groupLayout.createSequentialGroup()
 																				.addPreferredGap(ComponentPlacement.UNRELATED)
 																				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-																						.addComponent(timiTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																						.addComponent(plithosTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																						.addComponent(ApothikeusiButton)
-																						.addComponent(tipos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+																						.addComponent(CostTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																						.addComponent(NumberOfRoomsTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																						.addComponent(saveButton)
+																						.addComponent(Type, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 																						.addGap(37)
-																						.addComponent(AkiroButton))
+																						.addComponent(CancelButton))
 																						.addGroup(groupLayout.createSequentialGroup()
 																								.addGap(12)
-																								.addComponent(klines, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+																								.addComponent(NumberOfBeds, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 																								.addContainerGap(59, Short.MAX_VALUE))
 				);
 		groupLayout.linkSize(SwingConstants.VERTICAL, new Component[] {codeButton, nutritionButton});
-		groupLayout.linkSize(SwingConstants.VERTICAL, new Component[] {plithosTextField, timiTextField});
+		groupLayout.linkSize(SwingConstants.VERTICAL, new Component[] {NumberOfRoomsTextField, CostTextField});
 		groupLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {codeButton, nutritionButton});
-		groupLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {timiTextField, lblNewLabel, lblNewLabel_3});
+		groupLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {CostTextField, NumberOfBedsLabel, CostLabel});
 		getContentPane().setLayout(groupLayout);
 
 
@@ -170,7 +170,8 @@ public class DataManagementFrame extends JFrame {
 
 	class ButtonListener implements ActionListener{
 
-
+		/*Το παρακάτω τμήμα κώδικα χρησιμεύει έτσι ώστε παίρνοντας ως παράμετρο το frame να έχουμε την δυνατότητα
+		 * με το πάτημα του κουμπιού "ΟΚ" να κλείνει το συγκεκριμένο παράθυρο  */
 		private DataManagementFrame frame;
 		public ButtonListener(DataManagementFrame frame){
 			this.frame=frame;
@@ -179,15 +180,16 @@ public class DataManagementFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 
-			if(e.getSource() == ApothikeusiButton ){
-				int numberOfBeds = Integer.parseInt(klines.getSelectedItem().toString());
-				String type = tipos.getSelectedItem().toString();
-				int numberOfRooms = Integer.parseInt(plithosTextField.getText());
-				double cost = Double.parseDouble(timiTextField.getText());
+			if(e.getSource() == saveButton ){
+				int numberOfBeds = Integer.parseInt(NumberOfBeds.getSelectedItem().toString());
+				String type = Type.getSelectedItem().toString();
+				int numberOfRooms = Integer.parseInt(NumberOfRoomsTextField.getText());
+				double cost = Double.parseDouble(CostTextField.getText());
 
-				int count1 = 0;
-				int count2 = 0;
-				int count3 = 0;
+				int count1 = 0;//Πλήθος δωματίων REGULAR 
+				int count2 = 0;//Πλήθος δωματίων DELUXE
+				int count3 = 0;//Πλήθος δωματίων PLATINUM
+				//Οι παραπάνω μετρητές μας εξυπηρετούν ώστε τα δωμάτια να έχουν τον κατάλληλο αναγνωστικό αριθμό(id)
 				for(Room r: rm.getRooms()){
 					if(r.getType().equals("Regular")){
 						count1++;
@@ -199,7 +201,8 @@ public class DataManagementFrame extends JFrame {
 						count3++;
 					}
 				}
-
+				
+				//Το παρακάτω τμήμα κώδικα προσθέτει στο πίνακα των δωματίων τα καινούργια δωμάτια που έχει πληκτρολογήσει ο HOTEL MANAGER
 				if(type == "Regular"){
 					for(int i=0;i<numberOfRooms;i++){
 						rm.getRooms().add(new Room(numberOfBeds,i+count1+100,cost,type));
@@ -218,11 +221,11 @@ public class DataManagementFrame extends JFrame {
 				JOptionPane.showMessageDialog(null, "Changes Saved","Save",JOptionPane.INFORMATION_MESSAGE);
 
 			}
-			else if(e.getSource() == AkiroButton){
+			else if(e.getSource() == CancelButton){
 				frame.dispose();
 
 			}
-			else if(e.getSource() == btnReset){
+			else if(e.getSource() == resetButton){
 
 				systemReset();
 
@@ -239,18 +242,18 @@ public class DataManagementFrame extends JFrame {
 			else if(e.getSource() == nutritionButton){
 				NutritionChangeFrame ncf = new NutritionChangeFrame(rm);
 			}
-			
+
 			rm.getRoomsfm().roomSaveFile(rm.getRooms());
 
 		}
 	}
 
 	public void systemReset(){
-
-		rm.getReservations().clear();
-		rm.getRooms().clear();
-		rm.getResfm().reservationsSaveFile(rm.getReservations());
-		rm.getRoomsfm().roomSaveFile(rm.getRooms());
+		/*ΥΛΟΠΟΙΗΣΗ ΤΗΣ ΛΕΙΤΟΥΡΓΙΑΣ RESER*/
+		rm.getReservations().clear(); //διαγραφή όλων των κρατήσεων
+		rm.getRooms().clear(); //διαγραφή ολων των δωματίων
+		rm.getResfm().reservationsSaveFile(rm.getReservations()); //αποθήκευση αλλαγών
+		rm.getRoomsfm().roomSaveFile(rm.getRooms()); //αποθήκευση αλλαγών
 
 	}
 }

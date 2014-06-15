@@ -19,7 +19,7 @@ import javax.crypto.CipherOutputStream;
 import javax.crypto.NoSuchPaddingException;
 
 
-
+/*Κρυπτογράφηση του κωδικού που έχει ο HOTEL MANAGER χρησιμοποιώντας τον αλγόριθμο RSA */
 public class CodeFileManager implements Serializable {
 
 	private Cipher cipher;
@@ -73,7 +73,7 @@ public class CodeFileManager implements Serializable {
 	}
 
 	public String OpenEncryptedFile() {
-		
+
 		String code = null;
 		try{
 			cipher.init(Cipher.DECRYPT_MODE, privKey);

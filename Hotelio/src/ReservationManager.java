@@ -38,10 +38,10 @@ public class ReservationManager implements Serializable{
 		else if(i == 2)
 			return cost.getNutrition2();
 		return 0;
-		
-	}
-		
 
+	}
+
+	//Η μέθοδος αυτή βρίσκει όλα τα διαθέσιμα δωμάτια για μια συγκεκριμένη περίοδο
 	public ArrayList<Room> searchFreeRoom(Date arrival, Date departure, ArrayList<Room> rooms){
 		ArrayList<Room> freeRooms = new ArrayList<Room>();
 
@@ -63,51 +63,52 @@ public class ReservationManager implements Serializable{
 
 	public double checkOutAReservation(Reservation r, double extraCosts, double discounts){
 
-		double reservationCost = 0;
-		reservationCost = r.getRoom().getCost();
-		reservationCost += getNutritionCost(r.getClient().getNutrition());
-		reservationCost += extraCosts;
-		reservationCost = (1-discounts/100)*reservationCost;
+		double reservationCost = 0; //Αρχικοποίηση
+		reservationCost = r.getRoom().getCost(); //Παίρνουμε το κόστος του δωματίου
+		reservationCost += getNutritionCost(r.getClient().getNutrition()); //Παίρνουμε το κόστος για την διατροφή του πελάτη
+		reservationCost += extraCosts; //Προσθέτουμε τα επιπλέον έξοδα του πελάτη
+		reservationCost = (1-discounts/100)*reservationCost; //Τελικό κόστος
 
-		r.getClient().setCheckedIn(false);
-		
+		r.getClient().setCheckedIn(false); //κάνουμε το check-in false
+
 		r.setTotalCost(reservationCost);
 
-		resfm.reservationsSaveFile(reservations);
-		roomsfm.roomSaveFile(rooms);
+		resfm.reservationsSaveFile(reservations); //Αποθήκευση αλλαγών
+		roomsfm.roomSaveFile(rooms); //Αποθήκευση αλλαγών
 
 		return reservationCost;
 	}
 
+	//Δημιουργία νέας κράτησης
 	public boolean newReservation(Client c, ArrayList<Room> rooms, String room){
-		
-		boolean done = false;
-		if(rooms.size() == 0){
+
+		boolean done = false;//flag, αν έγινε επιτυχώς η κράτηση
+		if(rooms.size() == 0){			//ελεγχος αν υπάρχουν δωμάτια στο σύστημα
 			JOptionPane.showMessageDialog(null, "Δεν υπάρχουν καταχωρημένα δωμάτια στο πρόγραμμα");
 		}
 		else{
 			ArrayList<Room> freeRoomsforReservation = searchFreeRoom(c.getArrival(), c.getDeparture(), rooms);
-			if(freeRoomsforReservation.size() == 0)
+			if(freeRoomsforReservation.size() == 0)   //έλεγχος αν υπάρχουν διαθέσιμα δωμάτια
 				JOptionPane.showMessageDialog(null, "Δεν υπάρχουν διαθέσιμα δωμάτια για τις επιλεγμένες ημερομηνίες", "Πλήρης",JOptionPane.WARNING_MESSAGE);
 			else{
-				
-				boolean flagType = false;
-				boolean flagBeds = false;
+
+				boolean flagType = false;//flag, αν υπάρχει δωμάτιου ίδιου τύπου που επιθυμεί ο πελάτης
+				boolean flagBeds = false;//flag,αν υπάρχει δωμάτιο με αριθμό κρεβατιών όσο το σύνολο των ατόμων της κράτησης
 				int i=0;
 				while(!done && i < freeRoomsforReservation.size()){
 					Room r = freeRoomsforReservation.get(i);
-					if(r.getType().equals(room)){
+					if(r.getType().equals(room)){  //Έλεγχος τύπου δωματίου
 						flagType = true;
-						if(c.totalNumberOfPersons() == r.getNumberOfBeds()){
+						if(c.totalNumberOfPersons() == r.getNumberOfBeds()){ //Έλεγχος αν τα κρεβάτια που έχει το δωμάτιο είναι ίσα με το συνολικό αριθμό ατόμων του πελάτη
 							flagBeds = true;
 							reservations.add(new Reservation(c,r));
 
 							JOptionPane.showMessageDialog(null, "Η κράτησή σας ολοκληρώθηκε με επιτυχία", "Επιτυχία", JOptionPane.INFORMATION_MESSAGE);
 							done = true;
-							r.calendarSort();
-							Collections.sort(reservations, new ReservationCompare());
-							resfm.reservationsSaveFile(reservations);
-							roomsfm.roomSaveFile(rooms);
+							r.calendarSort();  //Ταξινόμηση του ημερολογίου του δωματίου που δεσμεύτηκε
+							Collections.sort(reservations, new ReservationCompare()); //Ταξινόμηση τω κρατήσεων
+							resfm.reservationsSaveFile(reservations); //Αποθήκευση αλλαγών που έγινε στο πίνακα με τις κρατήσεις
+							roomsfm.roomSaveFile(rooms); //Αποθήκευση των αλλαγών που έγιναν στο πίνακα με τα δωμάτια
 						}	
 					}
 
@@ -124,17 +125,18 @@ public class ReservationManager implements Serializable{
 		return done;
 	}
 
-
-	public ArrayList<Reservation> searchClient(String name){
+	//Αναζήτηση αν υπάρχει πελάτης με επώνυμο "name" που έχει κάνει κράτηση
+	public ArrayList<Reservation> searchClient(String surname){
 		ArrayList<Reservation> reservationsByName = new ArrayList<Reservation>();
 		for(Reservation r : reservations){
-			if(r.getClient().getSurname().equals(name)){
+			if(r.getClient().getSurname().equals(surname)){
 				reservationsByName.add(r);
 			}
 		}
 		return reservationsByName;
 	}
 
+	//Αναζήτηση διαθέσιμων δωματίων που πληρούν τις απαιτήσεις του πελάτη
 	public ArrayList<Room> searchFreeSameRooms(ArrayList<Room> rooms, Reservation res){
 
 		ArrayList<Room> freeRooms = searchFreeRoom(new Date(), res.getClient().getDeparture(), rooms);
@@ -152,15 +154,7 @@ public class ReservationManager implements Serializable{
 
 	public void deleteReservation(Reservation r){
 
-		/*Iterator<Period> iter = r.getRoom().getCalendar().iterator();
-
-		while(iter.hasNext()){
-			Period p = iter.next();
-			if(p.getArrivalDate().equals(r.getClient().getArrival()) && p.getDepartureDate().equals(r.getClient().getDeparture())){
-				iter.remove();
-			}
-		}*/
-
+		//Εύρεση της θέσης της ημερομηνίας της κράτηση στο ημερολόγιο του δωματίου
 		int index = -1;
 		for(int i=0;i<r.getRoom().getCalendar().size();i++){
 			if(r.getClient().getArrival().getMonth() == r.getRoom().getCalendar().get(i).getArrivalDate().getMonth() &&
@@ -170,6 +164,8 @@ public class ReservationManager implements Serializable{
 				index = i;
 			}
 		}
+
+		//Εύρεση της θέσης του δωματίου στο πίνακα με τα δωμάτια
 		int index2 = -1;
 		for(int j=0;j<rooms.size();j++){
 			if(rooms.get(j).getId() == r.getRoom().getId()){
@@ -177,33 +173,34 @@ public class ReservationManager implements Serializable{
 				break;
 			}
 		}
-		
-		rooms.get(index2).getCalendar().remove(index);
-		roomsfm.roomSaveFile(rooms);
-		reservations.remove(r);		
-		resfm.reservationsSaveFile(reservations);
+
+
+		rooms.get(index2).getCalendar().remove(index);//Διαγραφή περιόδου
+		roomsfm.roomSaveFile(rooms); //Αποθήκευση αλλαγών
+		reservations.remove(r);		//Διαγραφή κράτησης
+		resfm.reservationsSaveFile(reservations); //Αποθήκευση αλλαγών
 
 	}
 
 	public void changeRoom(Reservation r){
 
-		ArrayList<Room> freeSameRooms = searchFreeSameRooms(rooms, r);
-		if(freeSameRooms.size() == 0){
+		ArrayList<Room> freeSameRooms = searchFreeSameRooms(rooms, r);//Ευρεση διαθέσιμων δωματίων που πληρούν τις απαιτήσεις του πελάτη
+		if(freeSameRooms.size() == 0){    
 			JOptionPane.showMessageDialog(null, "Δεν υπάρχουν διαθέσιμα δωμάτια" , "Πλήρης" , JOptionPane.WARNING_MESSAGE);
 		}
 		else{
 			for(int i=0; i<r.getRoom().getCalendar().size(); i++ ){
 				if(r.getClient().getArrival().equals(r.getRoom().getCalendar().get(i).getArrivalDate())){
 					r.getRoom().getCalendar().remove(i);
-					
+
 				}
 			}
-			
+
 			r.setRoom(freeSameRooms.get(0));
 			r.getRoom().getCalendar().add(new Period(r.getClient().getArrival(),r.getClient().getDeparture()));
 			JOptionPane.showMessageDialog(null, "Η αλλαγή δωματίου έγινε επιτυχώς. Το νέο δωμάτιο είναι το "+r.getRoom().getId(), "Επιτυχία", JOptionPane.INFORMATION_MESSAGE);
 		}
-		
+
 		resfm.reservationsSaveFile(reservations);
 		roomsfm.roomSaveFile(rooms);
 	}

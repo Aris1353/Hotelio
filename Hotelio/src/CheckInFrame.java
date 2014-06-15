@@ -26,7 +26,8 @@ public class CheckInFrame extends JFrame {
 		ButtonListener buttonListener = new ButtonListener(this);
 
 		temp = new ArrayList<Reservation>();
-
+		/*Σαρώνουμε το πίνακα με τις υπάρχοντες κρατήσεις και αποθηκεύουμε στο temp εκείνες τις οποίες
+		 * η ημέρα άφιξης είναι ίδια με τη σημερινή*/
 		Date today = new Date();
 		for(Reservation r : rm.getReservations()){
 			if(r.getClient().getArrival().getDate() == today.getDate() && r.getClient().getArrival().getMonth() == today.getMonth() && r.getClient().getArrival().getYear() == today.getYear()){
@@ -34,7 +35,7 @@ public class CheckInFrame extends JFrame {
 			}
 		}
 
-		if (temp.size() == 0)
+		if (temp.size() == 0) //Έλεγχος για το αν υπάρχουν σήμερα κρατήσεις
 			JOptionPane.showMessageDialog(null, "Δεν υπάρχουν αφίξεις για σήμερα", "Check-In", JOptionPane.INFORMATION_MESSAGE);
 
 		else{
@@ -74,17 +75,18 @@ public class CheckInFrame extends JFrame {
 
 	class ButtonListener implements ActionListener{
 
+		/*Το παρακάτω τμήμα κώδικα χρησιμεύει έτσι ώστε παίρνοντας ως παράμετρο το frame να έχουμε την δυνατότητα
+		 * με το πάτημα του κουμπιού "ΟΚ" να κλείνει το συγκεκριμένο παράθυρο  */
 		private CheckInFrame chkFrame;
-
 		public ButtonListener(CheckInFrame frame){
 			this.chkFrame = frame;
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			int row = table.getSelectedRow();
-			Reservation selectedReservation = temp.get(table.convertRowIndexToModel(row));
-			rm.checkInAReservation(selectedReservation);
+			int row = table.getSelectedRow(); //Επιλογή κράτησης
+			Reservation selectedReservation = temp.get(table.convertRowIndexToModel(row)); //Μετατροπή της γραμμής σε κράτηση
+			rm.checkInAReservation(selectedReservation); //Γίνεται το ckeck-in
 
 
 			JOptionPane.showMessageDialog(null, "Το check-in επιβεβαιώθηκε", "Check-In", JOptionPane.INFORMATION_MESSAGE);

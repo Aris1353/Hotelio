@@ -17,7 +17,7 @@ public class IncomeReportFrame extends JFrame {
 
 	public IncomeReportFrame(ReservationManager rm) {
 		this.rm = rm;
-		double sum[]={0,0,0,0,0,0,0,0,0,0,0,0};
+		double sum[]={0,0,0,0,0,0,0,0,0,0,0,0}; //Δημιουργία πίνακα με τα έσοδα κάθε μήνα
 		for(int i=0; i<12; i++){
 			for(Reservation r : rm.getReservations()){
 				if(i == r.getClient().getDeparture().getMonth() ){

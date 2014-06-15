@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
+//Δημιουργία αρχείου για την αποθήκευση των δωματίων του ξενοδοχείου
 public class RoomFileManager implements Serializable {
 
 	public void roomSaveFile(ArrayList<Room> rooms){
@@ -32,15 +32,15 @@ public class RoomFileManager implements Serializable {
 			rooms = (ArrayList) in.readObject();
 			in.close();
 			fileIn.close();	
-		
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        rooms = new ArrayList<Room>();
-	    }catch (ClassNotFoundException e) {
-	        e.printStackTrace();
-	        rooms = new ArrayList<Room>();
-	    }
-			return rooms;
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			rooms = new ArrayList<Room>();
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			rooms = new ArrayList<Room>();
 		}
+		return rooms;
+	}
 
 }
