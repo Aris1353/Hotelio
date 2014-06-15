@@ -151,7 +151,7 @@ public class ReservationManagerFrame extends JFrame {
 	class ButtonListener implements ActionListener{
 
 		/*Το παρακάτω τμήμα κώδικα χρησιμεύει έτσι ώστε παίρνοντας ως παράμετρο το frame να έχουμε την δυνατότητα
-		 * με το πάτημα του κουμπιού "ΟΚ" να κλείνει το συγκεκριμένο παράθυρο  */
+		 * με το πάτημα του κουμπιού "’κυρο" να κλείνει το συγκεκριμένο παράθυρο  */
 		ReservationManagerFrame rmframe;
 		public ButtonListener(ReservationManagerFrame rmf){
 			this.rmframe = rmf;

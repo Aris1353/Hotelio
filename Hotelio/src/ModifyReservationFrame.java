@@ -211,7 +211,7 @@ public class ModifyReservationFrame extends JFrame {
 	class ConfirmButtonListener implements ActionListener{
 
 		/*Το παρακάτω τμήμα κώδικα χρησιμεύει έτσι ώστε παίρνοντας ως παράμετρο το frame να έχουμε την δυνατότητα
-		 * με το πάτημα του κουμπιού "ΟΚ" να κλείνει το συγκεκριμένο παράθυρο  */
+		 * με το πάτημα του κουμπιού "Επιβεβαίωση" να κλείνει το συγκεκριμένο παράθυρο  */
 		private ModifyReservationFrame mrf;
 		public ConfirmButtonListener(ModifyReservationFrame mrf){
 			this.mrf=mrf;

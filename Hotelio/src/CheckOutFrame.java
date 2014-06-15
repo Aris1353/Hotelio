@@ -83,7 +83,7 @@ public class CheckOutFrame extends JFrame {
 	class ButtonListener implements ActionListener{
 
 		/*Το παρακάτω τμήμα κώδικα χρησιμεύει έτσι ώστε παίρνοντας ως παράμετρο το frame να έχουμε την δυνατότητα
-		 * με το πάτημα του κουμπιού "ΟΚ" να κλείνει το συγκεκριμένο παράθυρο  */
+		 * με το πάτημα του κουμπιού "Check-out" να γίνεται ανανέωση στο συγκεκριμένο παράθυρο  */
 		private CheckOutFrame chkFrame;
 
 		public ButtonListener(CheckOutFrame frame){

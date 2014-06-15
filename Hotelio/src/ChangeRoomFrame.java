@@ -128,7 +128,7 @@ public class ChangeRoomFrame extends JFrame {
 	class ButtonListener implements ActionListener{
 
 		/*Το παρακάτω τμήμα κώδικα χρησιμεύει έτσι ώστε παίρνοντας ως παράμετρο το frame να έχουμε την δυνατότητα
-		 * με το πάτημα του κουμπιού "ΟΚ" να κλείνει το συγκεκριμένο παράθυρο  */
+		 * γίνεται ανανέωση ή με το πάτημα του κουμπιού "’κυρο" να κλείνει το συγκεκριμένο παράθυρο */
 		ChangeRoomFrame crf;
 		public ButtonListener(ChangeRoomFrame crf){
 			this.crf = crf;

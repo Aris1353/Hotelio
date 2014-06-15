@@ -132,7 +132,7 @@ public class FreeRoomsFrame extends JFrame {
 	class ButtonListener implements ActionListener{
 
 		/*Το παρακάτω τμήμα κώδικα χρησιμεύει έτσι ώστε παίρνοντας ως παράμετρο το frame να έχουμε την δυνατότητα
-		 * με το πάτημα του κουμπιού "ΟΚ" να κλείνει το συγκεκριμένο παράθυρο  */
+		 * με το πάτημα του κουμπιού "’κυρο" να κλείνει το συγκεκριμένο παράθυρο  */
 		FreeRoomsFrame frFrame;
 		public ButtonListener(FreeRoomsFrame frFrame){
 			this.frFrame = frFrame;
