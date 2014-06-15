@@ -98,7 +98,6 @@ public class ModifyReservationFrame extends JFrame {
 
 
 		Date end = r.getClient().getDeparture();
-		System.out.println(end);
 		SpinnerDateModel dateModel = new SpinnerDateModel(now, null, null , Calendar.DAY_OF_YEAR);
 		ArrivalSpinner = new JSpinner(dateModel);
 		ArrivalSpinner.setModel(new SpinnerDateModel(now, null, null, Calendar.DAY_OF_YEAR));
